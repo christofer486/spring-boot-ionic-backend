@@ -36,11 +36,14 @@ public class Cliente implements Serializable {
 	
 	@JsonManagedReference
 	@OneToMany(mappedBy="cliente")
-	private List<Endereco> enderecos = new ArrayList<Endereco>();
+	private List<Endereco> enderecos = new ArrayList<>();
 	
 	@ElementCollection
 	@CollectionTable(name="TELEFONE")
-	private Set<String> telefones =  new HashSet<>(); 
+	private Set<String> telefones =  new HashSet<>();
+	
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
 	public Cliente() {
 	}
@@ -110,6 +113,14 @@ public class Cliente implements Serializable {
 		return email;
 	}
 	
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
