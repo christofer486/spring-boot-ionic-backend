@@ -3,6 +3,7 @@ package com.chris.cursomc.resources;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
+import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.net.URI;
 
@@ -25,8 +26,8 @@ public class CategoriaResource {
 	private CategoriaService srv;
 	
 	@RequestMapping(value="/{id}", method=GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) {
-		Categoria obj = srv.buscar(id);
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
+		Categoria obj = srv.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
@@ -35,6 +36,13 @@ public class CategoriaResource {
 		obj = srv.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method=PUT)
+	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
+		obj.setId(id);
+		obj = srv.update(obj);
+		return ResponseEntity.noContent().build();
 	}
 
 }
