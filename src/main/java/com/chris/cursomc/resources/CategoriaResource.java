@@ -1,6 +1,7 @@
 package com.chris.cursomc.resources;
 
 
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 import static org.springframework.web.bind.annotation.RequestMethod.PUT;
@@ -45,4 +46,9 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@RequestMapping(value="/{id}", method=DELETE)
+	public ResponseEntity<Categoria> delete(@PathVariable Integer id) {
+		srv.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }

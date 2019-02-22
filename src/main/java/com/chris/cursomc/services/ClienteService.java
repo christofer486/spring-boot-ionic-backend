@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.chris.cursomc.domain.Cliente;
 import com.chris.cursomc.repositories.ClienteRepository;
-import com.chris.cursomc.services.exception.ObjectNotFoundException;
+import com.chris.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
