@@ -37,7 +37,7 @@ public class ResourceExceptionHandler {
 		ValidationError err = new ValidationError(HttpStatus.UNPROCESSABLE_ENTITY.value(), "Erro de validação", System.currentTimeMillis());
 		for (FieldError fe : e.getBindingResult().getFieldErrors()) {
 			err.addError(fe.getField(), fe.getDefaultMessage());
-		}		
+		}			
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
 }
