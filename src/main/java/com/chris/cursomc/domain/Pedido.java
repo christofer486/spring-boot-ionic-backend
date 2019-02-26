@@ -107,7 +107,6 @@ public class Pedido  implements Serializable {
 		return soma;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
