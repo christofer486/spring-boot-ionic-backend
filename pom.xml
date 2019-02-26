@@ -11,6 +11,7 @@
 	<groupId>com.chris.cursomc</groupId>
 	<artifactId>cursomc</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	
 	<name>cursomc</name>
 	<description>Estudo de caso java para modelagem conceitual com UML</description>
 
