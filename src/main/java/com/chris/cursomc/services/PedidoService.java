@@ -3,14 +3,14 @@ package com.chris.cursomc.services;
 import java.util.Date;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chris.cursomc.domain.ItemPedido;
 import com.chris.cursomc.domain.PagamentoComBoleto;
 import com.chris.cursomc.domain.Pedido;
+import com.chris.cursomc.domain.Produto;
 import com.chris.cursomc.domain.enums.EstadoPagamento;
 import com.chris.cursomc.repositories.ItemPedidoRepository;
 import com.chris.cursomc.repositories.PagamentoRepository;
@@ -37,14 +37,19 @@ public class PedidoService {
 	@Autowired
 	private ItemPedidoRepository itemPedidoRepository;
 	
+	@Autowired
+	private ClienteService  clienteService;
+	
 	public Pedido find(Integer id) {
 		Optional<Pedido> lista = repo.findById(id);
 		return lista.orElseThrow(() ->new ObjectNotFoundException("Objeto não encontrado! Id: " + id + ", Tipo " + Pedido.class.getName()));
 	}
 
+	@Transactional
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstate(new Date());
+		obj.setCliente(clienteService.find(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		if (obj.getPagamento() instanceof PagamentoComBoleto) {
@@ -57,10 +62,13 @@ public class PedidoService {
 		
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
-			ip.setPreco(produtoService.find(ip.getProduto().getId()).getPreco());
+			Produto produto = produtoService.find(ip.getProduto().getId());
+			ip.setProduto(produto);
+			ip.setPreco(produto.getPreco());
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
+		System.out.println(obj);
 		return obj;
 	}
 

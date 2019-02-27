@@ -1,8 +1,11 @@
 package com.chris.cursomc.domain;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -44,7 +47,6 @@ public class Pedido  implements Serializable {
 	public Pedido() {}
 
 	public Pedido(Integer id, Date instate, Cliente cliente, Endereco enderecoDeEntrega) {
-		super();
 		this.id = id;
 		this.instate = instate;
 		this.cliente = cliente;
@@ -131,5 +133,26 @@ public class Pedido  implements Serializable {
 			return false;
 		return true;
 	}
-
+	
+	@Override
+	public String toString() {
+		NumberFormat nf = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		StringBuilder buf = new StringBuilder();
+		buf.append("Pedido número"); 
+		buf.append(getId());
+		buf.append(", Instante: ");
+		buf.append(sdf.format(getInstate()));
+		buf.append(", Cliente: ");
+		buf.append(getCliente().getNome());
+		buf.append(", Situação pagamento: ");
+		buf.append(getPagamento().getEstado().getDescricao());
+		buf.append("\nDetalhes:\n"); 
+		for (ItemPedido ip : itens) {
+			buf.append(ip.toString());
+		}
+		buf.append(", Valor total: ");
+		buf.append(nf.format(getValorTotal()));
+		return buf.toString();
+	}
 }
