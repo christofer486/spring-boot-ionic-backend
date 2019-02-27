@@ -15,7 +15,6 @@ import com.chris.cursomc.domain.enums.EstadoPagamento;
 import com.chris.cursomc.repositories.ItemPedidoRepository;
 import com.chris.cursomc.repositories.PagamentoRepository;
 import com.chris.cursomc.repositories.PedidoRepository;
-import com.chris.cursomc.resources.BoletoService;
 import com.chris.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service

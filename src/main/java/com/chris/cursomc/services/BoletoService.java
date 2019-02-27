@@ -1,4 +1,4 @@
-package com.chris.cursomc.resources;
+package com.chris.cursomc.services;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.chris.cursomc.resources;
+package com.chris.cursomc.services;
 
 import static java.util.Arrays.asList;
 
@@ -131,7 +131,7 @@ public class DBService {
 		cidadeRepository.saveAll(asList(cid1, cid2, cid3));
 		
 		
-		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "363789412563", TipoCliente.PESSOAFISICA);
+		Cliente cli1 = new Cliente(null, "Maria Silva", "jeferson.c.mga@gmail.com", "363789412563", TipoCliente.PESSOAFISICA);
 		cli1.getTelefones().addAll(asList("9874564987","4897446465"));
 		
 		Endereco end1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "382045470", cli1, cid1);

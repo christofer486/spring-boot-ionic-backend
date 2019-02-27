@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
-import com.chris.cursomc.resources.DBService;
+import com.chris.cursomc.services.DBService;
 import com.chris.cursomc.services.EmailService;
 import com.chris.cursomc.services.MockEmailService;
 
