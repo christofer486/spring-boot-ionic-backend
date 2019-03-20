@@ -38,13 +38,13 @@ public class ResourceExceptionHandler {
 		ValidationError err = new ValidationError(HttpStatus.UNPROCESSABLE_ENTITY.value(), "Erro de validação", System.currentTimeMillis());
 		for (FieldError fe : e.getBindingResult().getFieldErrors()) {
 			err.addError(fe.getField(), fe.getDefaultMessage());
-		}			
+		}
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
 	
 	@ExceptionHandler(AuthorizationException.class) 
 	public ResponseEntity<StandardError> authorization(ObjectNotFoundException e, HttpServletRequest request){
-		StandardError error = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+		StandardError error = new StandardError(HttpStatus.FORBIDDEN .value(), e.getMessage(), System.currentTimeMillis());
 		return ResponseEntity.status(NOT_FOUND).body(error);
 	}
 }
